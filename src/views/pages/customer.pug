@@ -1,0 +1,38 @@
+extends ../layout/layout.pug
+block content
+  div(class="container")
+    div(class="row mt-5")
+      div(class="col-md-7")
+        table(class="table table-bordered table-hover")
+          thead 
+            tr
+              th N°
+              th Nombre
+              th Direccion 
+              th Teléfono 
+              th Acciones
+          tbody
+            if customer
+              each val in customer
+                tr
+                  td= val.id
+                  td= val.nombre 
+                  td= val.direccion
+                  td= val.phone
+                  td 
+                    a(href="/delete/"+val.id,class="btn btn-danger") Borrar
+                    a(href="/edit/"+val.id,class="btn btn-primary") Editar
+                    
+              
+            
+      div(class="col-md-5")
+        div.card
+          div.card-body
+            form(action="/add",method="POST")
+              input(type="text",name="nombre",placeholder="Nombre...",class="form-control")
+              br
+              input(type="text",name="direccion",placeholder="Direccion...",class="form-control")
+              br
+              input(type="text",name="phone",placeholder="Teléfono...",class="form-control")
+              br
+              button(type='submit',class="btn btn-primary") Submit
